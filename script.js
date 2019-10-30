@@ -2,7 +2,7 @@
 
 const accept = window.localStorage.getItem('sleek_cookie_consent');
 
-if (SLEEK_COOKIE_CONSENT && !accept) {
+if (typeof SLEEK_COOKIE_CONSENT !== 'undefined' && !accept) {
 	const el = document.createElement('aside');
 
 	el.id = 'cookie-consent';
