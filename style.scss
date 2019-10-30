@@ -1,0 +1,20 @@
+#cookie-consent,
+#site-notice {
+	background: var(--color-overlay);
+
+	padding: var(--spacing-small);
+
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 1000;
+
+	font-size: var(--font-size-small);
+	color: white;
+	text-align: center;
+}
+
+#cookie-consent + #site-notice {
+	bottom: calc(var(--spacing-small) * 2 + var(--font-size-small) * var(--line-height-default));
+}
