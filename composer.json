@@ -9,5 +9,8 @@
     ],
     "autoload": {
         "files": ["sleek-notices.php"]
+    },
+    "require": {
+        "powerbuoy/sleek-settings": "^0.0.0"
     }
 }
