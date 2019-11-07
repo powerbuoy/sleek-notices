@@ -1,1 +1,1 @@
-# sleek-notices
+Adds a configurable cookie consent warning to the bottom of the page. Also adds the ability to display a site wide notice (useful for things like "Right now we're experiencing issues with our booking system" etc).

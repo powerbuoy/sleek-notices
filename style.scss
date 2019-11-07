@@ -1,8 +1,8 @@
 #cookie-consent,
 #site-notice {
-	background: var(--color-overlay);
+	background: var(--color-overlay, rgba(0, 0, 0, .8));
 
-	padding: var(--spacing-small);
+	padding: var(--spacing-small, 1rem);
 
 	position: fixed;
 	left: 0;
@@ -10,11 +10,11 @@
 	right: 0;
 	z-index: 1000;
 
-	font-size: var(--font-size-small);
+	font-size: var(--font-size-small, .8rem);
 	color: white;
 	text-align: center;
 }
 
 #site-notice ~ #cookie-consent {
-	bottom: calc(var(--spacing-small) * 2 + var(--font-size-small) * var(--line-height-default));
+	bottom: calc(var(--spacing-small, 1rem) * 2 + var(--font-size-small, .8rem) * var(--line-height-default, 1.15));
 }
