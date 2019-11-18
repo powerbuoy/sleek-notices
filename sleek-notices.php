@@ -27,7 +27,26 @@ add_action('wp_footer', function () {
 	if ($cookieConsent) {
 		?>
 		<script>
-			SLEEK_COOKIE_CONSENT = <?php echo json_encode($cookieConsent) ?>;
+			var accept = window.localStorage.getItem('sleek_cookie_consent');
+
+			if (!accept) {
+				var el = document.createElement('aside');
+
+				el.id = 'cookie-consent';
+				el.innerHTML = '<?php echo addslashes($cookieConsent) ?>';
+
+				document.body.appendChild(el);
+
+				var close = el.querySelector('a.close');
+
+				if (close) {
+					close.addEventListener('click', function (e) {
+						e.preventDefault();
+						window.localStorage.setItem('sleek_cookie_consent', true);
+						el.parentNode.removeChild(el);
+					});
+				}
+			}
 		</script>
 		<?php
 	}
