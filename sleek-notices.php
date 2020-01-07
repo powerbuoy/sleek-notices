@@ -4,12 +4,12 @@ namespace Sleek\Notices;
 #####################
 # Add settings fields
 add_action('admin_init', function () {
-	\Sleek\Settings\add_setting('site_notice', 'textarea', esc_html__('Site notice', 'sleek'));
-
+	if (get_theme_support('sleek-notice')) {
+		\Sleek\Settings\add_setting('site_notice', 'textarea', esc_html__('Site notice', 'sleek'));
+	}
 	if (get_theme_support('sleek-cookie-consent')) {
 		\Sleek\Settings\add_setting('cookie_consent', 'textarea', esc_html__('Cookie consent text', 'sleek'));
 	}
-
 	if (get_theme_support('sleek-outdated-browser-warning')) {
 		\Sleek\Settings\add_setting('outdated_browser_warning', 'textarea', esc_html__('Outdated browser warning', 'sleek'));
 	}
@@ -19,7 +19,7 @@ add_action('admin_init', function () {
 # Add stuff to footer
 add_action('wp_footer', function () {
 	# Site notice
-	if ($notice = \Sleek\Settings\get_setting('site_notice')) {
+	if (get_theme_support('sleek-notice') and ($notice = \Sleek\Settings\get_setting('site_notice'))) {
 		echo '<aside id="site-notice">' . $notice . '</aside>';
 	}
 
