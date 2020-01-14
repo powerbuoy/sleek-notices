@@ -75,8 +75,19 @@ add_action('wp_footer', function () {
 			$browserWarning = apply_filters('sleek_outdated_browser_warning', __('<strong>Oops!</strong> Your browser is not supported. For a richer browsing experience, please consider upgrading to a better, modern browser like <a href="https://www.google.com/chrome/">Google Chrome</a>, <a href="https://www.mozilla.org/en-US/firefox/new/">Mozilla Firefox</a>, <a href="https://support.apple.com/downloads/safari">Safari</a>, <a href="https://www.opera.com/">Opera</a> or <a href="https://www.microsoft.com/en-us/windows/microsoft-edge">Microsoft Edge</a>.', 'sleek'));
 		}
 
-		if ($browserWarning and (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE ') or strpos($_SERVER['HTTP_USER_AGENT'], 'Trident/'))) {
-			echo '<aside id="outdated-browser-warning">' . $browserWarning . '</aside>';
+		if ($browserWarning) {
+			?>
+			<script>
+				if (window.navigator.userAgent.indexOf('MSIE') > 0 || window.navigator.userAgent.indexOf('Trident/') > 0) {
+					var el = document.createElement('aside');
+
+					el.id = 'outdated-browser-warning';
+					el.innerHTML = '<?php echo addslashes($browserWarning) ?>';
+
+					document.body.appendChild(el);
+				}
+			</script>
+			<?php
 		}
 	}
 });
