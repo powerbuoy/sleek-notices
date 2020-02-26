@@ -32,7 +32,9 @@ add_action('wp_footer', function () {
 		}
 		else {
 			$cookieUrl = (get_option('wp_page_for_privacy_policy') and get_post_status(get_option('wp_page_for_privacy_policy')) === 'publish') ? get_permalink(get_option('wp_page_for_privacy_policy')) : 'https://cookiesandyou.com/';
-			$cookieConsent = apply_filters('sleek_cookie_consent', sprintf(__('We use cookies to bring you the best possible experience when browsing our site. <a href="%s" target="_blank" rel="noopener">Read more</a> | <a href="#" class="close">Accept</a>', 'sleek'), $cookieUrl), $cookieUrl);
+			$cookieConsent = __('We use cookies to bring you the best possible experience when browsing our site.', 'sleek');
+			$cookieConsent .= '<a href="' . $cookieUrl . '" target="_blank" rel="noopener">' . __('Read more', 'sleek') . '</a> | <a href="#" class="close">' . __('Accept', 'sleek') . '</a>';
+			$cookieConsent = apply_filters('sleek_cookie_consent', $cookieConsent, $cookieUrl);
 		}
 
 		# Add cookie consent with JS
