@@ -4,13 +4,10 @@ namespace Sleek\Notices;
 #####################
 # Add settings fields
 add_action('admin_init', function () {
-	if (get_theme_support('sleek-notice')) {
-		\Sleek\Settings\add_setting('site_notice', 'textarea', esc_html__('Site notice', 'sleek'));
-	}
-	if (get_theme_support('sleek-cookie-consent')) {
+	if (get_theme_support('sleek/notices/cookie_consent')) {
 		\Sleek\Settings\add_setting('cookie_consent', 'textarea', esc_html__('Cookie consent text', 'sleek'));
 	}
-	if (get_theme_support('sleek-outdated-browser-warning')) {
+	if (get_theme_support('sleek/notices/outdated_browser_warning')) {
 		\Sleek\Settings\add_setting('outdated_browser_warning', 'textarea', esc_html__('Outdated browser warning', 'sleek'));
 	}
 });
@@ -18,13 +15,8 @@ add_action('admin_init', function () {
 #####################
 # Add stuff to footer
 add_action('wp_footer', function () {
-	# Site notice
-	if (get_theme_support('sleek-notice') and ($notice = \Sleek\Settings\get_setting('site_notice'))) {
-		echo '<aside id="site-notice">' . $notice . '</aside>';
-	}
-
 	# Cookie consent
-	if (get_theme_support('sleek-cookie-consent')) {
+	if (get_theme_support('sleek/notices/cookie_consent')) {
 		$cookieConsent = null;
 
 		if ($consent = \Sleek\Settings\get_setting('cookie_consent')) {
@@ -34,7 +26,7 @@ add_action('wp_footer', function () {
 			$cookieUrl = (get_option('wp_page_for_privacy_policy') and get_post_status(get_option('wp_page_for_privacy_policy')) === 'publish') ? get_permalink(get_option('wp_page_for_privacy_policy')) : 'https://cookiesandyou.com/';
 			$cookieConsent = __('We use cookies to bring you the best possible experience when browsing our site.', 'sleek');
 			$cookieConsent .= ' <a href="' . $cookieUrl . '" target="_blank" rel="noopener">' . __('Read more', 'sleek') . '</a> | <a href="#" class="close">' . __('Accept', 'sleek') . '</a>';
-			$cookieConsent = apply_filters('sleek_cookie_consent', $cookieConsent, $cookieUrl);
+			$cookieConsent = apply_filters('sleek/notices/cookie_consent', $cookieConsent, $cookieUrl);
 		}
 
 		# Add cookie consent with JS
@@ -67,14 +59,14 @@ add_action('wp_footer', function () {
 	}
 
 	# IE warning
-	if (get_theme_support('sleek-outdated-browser-warning')) {
+	if (get_theme_support('sleek/notices/outdated_browser_warning')) {
 		$browserWarning = null;
 
 		if ($warning = \Sleek\Settings\get_setting('outdated_browser_warning')) {
 			$browserWarning = $warning;
 		}
 		else {
-			$browserWarning = apply_filters('sleek_outdated_browser_warning', __('<strong>Oops!</strong> Your browser is not supported. For a richer browsing experience, please consider upgrading to a better, modern browser like <a href="https://www.google.com/chrome/">Google Chrome</a>, <a href="https://www.mozilla.org/en-US/firefox/new/">Mozilla Firefox</a>, <a href="https://support.apple.com/downloads/safari">Safari</a>, <a href="https://www.opera.com/">Opera</a> or <a href="https://www.microsoft.com/en-us/windows/microsoft-edge">Microsoft Edge</a>.', 'sleek'));
+			$browserWarning = apply_filters('sleek/notices/outdated_browser_warning', __('<strong>Oops!</strong> Your browser is not supported. For a richer browsing experience, please consider upgrading to a better, modern browser like <a href="https://www.google.com/chrome/">Google Chrome</a>, <a href="https://www.mozilla.org/en-US/firefox/new/">Mozilla Firefox</a>, <a href="https://support.apple.com/downloads/safari">Safari</a>, <a href="https://www.opera.com/">Opera</a> or <a href="https://www.microsoft.com/en-us/windows/microsoft-edge">Microsoft Edge</a>.', 'sleek'));
 		}
 
 		if ($browserWarning) {
