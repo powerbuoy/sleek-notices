@@ -1,5 +1,6 @@
 {
     "name": "powerbuoy/sleek-notices",
+    "description": "Adds settings to Settings -> Sleek to display various notices on the site.",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
