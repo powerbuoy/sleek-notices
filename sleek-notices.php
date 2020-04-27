@@ -36,6 +36,8 @@ add_action('wp_footer', function () {
 				var accept = window.localStorage.getItem('sleek_cookie_consent');
 
 				if (!accept) {
+					document.documentElement.classList.add('cookie-consent--not-accepted');
+
 					var el = document.createElement('aside');
 
 					el.id = 'cookie-consent';
@@ -52,6 +54,9 @@ add_action('wp_footer', function () {
 							el.parentNode.removeChild(el);
 						});
 					}
+				}
+				else {
+					document.documentElement.classList.add('cookie-consent--accepted');
 				}
 			</script>
 			<?php
