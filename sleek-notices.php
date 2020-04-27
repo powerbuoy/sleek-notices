@@ -52,6 +52,8 @@ add_action('wp_footer', function () {
 							e.preventDefault();
 							window.localStorage.setItem('sleek_cookie_consent', true);
 							el.parentNode.removeChild(el);
+							document.documentElement.classList.remove('cookie-consent--not-accepted');
+							document.documentElement.classList.add('cookie-consent--accepted');
 						});
 					}
 				}
