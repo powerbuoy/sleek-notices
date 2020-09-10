@@ -23,7 +23,7 @@ add_action('wp_footer', function () {
 			$cookieConsent = $consent;
 		}
 		else {
-			$cookieUrl = (get_option('wp_page_for_privacy_policy') and get_post_status(get_option('wp_page_for_privacy_policy')) === 'publish') ? get_permalink(get_option('wp_page_for_privacy_policy')) : 'https://cookiesandyou.com/';
+			$cookieUrl = get_privacy_policy_url() ? get_privacy_policy_url() : apply_filters('sleek/notices/cookie_consent_url', 'https://cookiesandyou.com/');
 			$cookieConsent = __('We use cookies to bring you the best possible experience when browsing our site.', 'sleek');
 			$cookieConsent .= ' <a href="' . $cookieUrl . '" target="_blank" rel="noopener">' . __('Read more', 'sleek') . '</a> | <a href="#" class="close">' . __('Accept', 'sleek') . '</a>';
 			$cookieConsent = apply_filters('sleek/notices/cookie_consent', $cookieConsent, $cookieUrl);
