@@ -5,10 +5,10 @@ namespace Sleek\Notices;
 # Add settings fields
 add_action('admin_init', function () {
 	if (get_theme_support('sleek/notices/cookie_consent')) {
-		\Sleek\Settings\add_setting('cookie_consent', 'textarea', esc_html__('Cookie consent text', 'sleek'));
+		\Sleek\Settings\add_setting('cookie_consent', 'textarea', esc_html__('Cookie consent text', 'sleek_admin'));
 	}
 	if (get_theme_support('sleek/notices/outdated_browser_warning')) {
-		\Sleek\Settings\add_setting('outdated_browser_warning', 'textarea', esc_html__('Outdated browser warning', 'sleek'));
+		\Sleek\Settings\add_setting('outdated_browser_warning', 'textarea', esc_html__('Outdated browser warning', 'sleek_admin'));
 	}
 });
 
